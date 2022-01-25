@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.js" ></script>
+    <script src="/script.js" defer></script> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Satisfy&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.js"></script>
+    <script src="/script.js" defer></script>
+    <link rel="stylesheet" href="locomotive.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+         body,
+                    html {
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    font-family: 'Playfair Display', serif;
+                    overscroll-behavior: none;
+                    }
+                    /* .scroller {
+                    overflow-y: hidden !important;
+                    } */
+
+                    section {
+                    height: 100vh;
+                    }
+
+                    .intro {
+                    /* display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+            
+                    -webkit-box-pack: center;
+                    -webkit-justify-content: center;
+                    -ms-flex-pack: center;
+                    -webkit-box-align: center;
+                    -webkit-align-items: center;
+                    -ms-flex-align: center; */
+                    height: 100vh;
+                    width: 100vw;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: flex-start;
+                    background-color: #efe7dd;
+                    position: relative;
+                    }
+
+                    .intro-text{
+                        font-size: 8rem;
+                        color: rgb(85, 44, 33);
+                        /* bottom: 50%;
+                        transform: translateY(-50%); */
+                        /* opacity: 0; */
+                        /* padding: 0; */
+                        margin: 0;
+                    }
+                    .spin{
+                        position: absolute;
+                        top: 10%;
+                        left: 80%;
+                        transform: translate(-80%,-10%);
+                        width: 200px;
+                    }
+                    svg { width: 500%; }
+                    svg textPath { 
+                    font-size: 63px;
+                        font-family:  sans-serif;
+                        text-transform: uppercase;
+                        letter-spacing: 20px;
+                        fill: #111;
+                    background: #333;
+                    }
+                    @keyframes spin{
+                    100%{
+                        transform: rotate(360deg);
+                    }
+                    }
+
+                    @keyframes fade-in{
+                    0%{
+                        opacity: 0;
+                    }
+
+                    100%{
+                        opacity: 1;
+                    }
+                    }
+
+                    section.black {
+                    background-color: white;
+
+                    /* display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+            
+                    -webkit-justify-content: space-around;
+                    -ms-flex-pack: distribute; */
+                    display: flex;
+                    justify-content: space-around;
+
+                    /*---*/
+                    /*
+                    -webkit-box-align: center;
+                    -webkit-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    */
+
+                    /*---*/
+                    height: 400vh;
+                    }
+
+                    section.blue {
+                    /* background-color: blue;  */
+                    height: 200vh;
+                    color: rgb(85, 44, 33);
+                    }
+
+                    .text {
+                    color: white;
+                    }
+
+                    .text-wrap {
+                    position: relative;
+                    overflow: hidden;
+                    width: 450px;
+
+                    /*---*/
+                    height: 400vh;
+                    }
+
+                    .text-wrapper {
+                    position: relative;
+                    width: 450px;
+
+                    /*---*/
+                    height: 100%;
+                    }
+
+                    .lerp-wrap {
+                      display: inline-block;
+                      vertical-align: middle;
+                      margin-left: 1.25rem;
+                      line-height: 1.1;
+                    }
+                    .lerp-wrap span {
+                      display: inline-block;
+                      /* font-size: clamp(32px, 5vw, 8vw);
+                       */
+                       font-size: 2.5rem;
+                    }
+
+                    .panel-text {
+                    position: relative;
+                    left: 0%;
+                    top: 0%;
+                    right: 0%;
+                    bottom: 0%;
+                    z-index: 1;
+                    width: 100%;
+
+                    /*---*/
+                    height: 100vh;
+                    color: rgb(85, 44, 33);
+                    font-size: 40px;
+                    text-transform: uppercase;
+                    font-weight: 900;
+                    text-align: center;
+                    background-color: white;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    }
+
+                    /* .panel-text.blue-text {
+                    color: blue;
+                    }
+
+                    .panel-text.red-text {
+                    color: red;
+                    }
+
+                    .panel-text.purple-text {
+                    color: purple;
+                    }
+
+                    .panel-text.orange-text {
+                    color: orange;
+                    } */
+
+                    .p-wrap {
+                    position: relative;
+                    overflow: hidden;
+                    width: 50%;
+                    height: 80vh;
+
+                    /*---*/
+                    margin-top: 10vh;
+                    }
+
+                    .panel {
+                    position: absolute;
+                    left: 0%;
+                    top: 0%;
+                    right: 0%;
+                    bottom: 0%;
+                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                    }
+
+                    .panel.blue {
+                    /* background-color: blue; */
+                    background-image: url(	http://dentallounge.jp/site_anzu/wp-content/themes/anzu/images/ph_examine01.jpg);
+                    background-size: cover;
+                    }
+
+                    .panel.red {
+                    /* background-color: red; */
+                    background-image: url(	http://dentallounge.jp/site_anzu/wp-content/themes/anzu/images/ph_lounge03.jpg);
+                    background-size: cover;
+                    }
+
+                    .panel.orange {
+                    /* background-color: orange; */
+                    background-image: url(	http://dentallounge.jp/site_anzu/wp-content/themes/anzu/images/ph_disinfect03.jpg
+        );
+                    background-size: cover;
+                    }
+
+                    .panel.purple {
+                    /* background-color: purple; */
+                    background-image: url(http://dentallounge.jp/site_anzu/wp-content/themes/anzu/images/ph_lounge02.jpg);
+                    background-size: cover;
+                    }
+
+                    .hero{
+                        width: 100vw;
+                        height: 100vh;
+                        position: relative;
+                    }
+                    .hero-img{
+                        position: absolute;
+                        width: 60%;
+                        height: 60%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                    }
+                    .hero-text{
+                        position: absolute;
+                        font-size: 4rem;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                        z-index: 1;
+                    }
+
+                    .white{
+                        height: 100vh;
+                        width: 400vw;
+                        display: flex;
+                        justify-content: start;
+                        background-color: rgb(85, 44, 33);
+                        overflow-y: hidden;
+                        
+                    }
+                    .treatment1 img{
+                        width: 40%;
+                        height: 50%;
+                        position: absolute;
+                        top: 50%;
+                        left: 30%;
+                        transform: translate(-30%,-50%);
+                    }
+                    .treatment2 img{
+                        width: 60%;
+                        height: 60%;
+                        position: absolute;
+                        top: 70%;
+                        left: 30%;
+                        transform: translate(-30%,-70%);
+                    }
+                    .treatment3 img{
+                        width: 50%;
+                        height: 50%;
+                        position: absolute;
+                        top: 30%;
+                        left: 30%;
+                        transform: translate(-30%,-30%);
+                    }
+                    .treatment4 img{
+                        width: 50%;
+                        height: 60%;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                    }
+                    .horizotal{
+                        height: 100%;
+                        width: 100vw;
+                        position: relative;
+                    }
+                    .treatment1 div{
+                        position: absolute;
+                        top: 50%;
+                        left: 70%;
+                        transform: translate(-70%,-50%);
+                    }
+                    .treatment2 div{
+                        position: absolute;
+                        top: 20%;
+                        left: 10%;
+                        transform: translate(-10%,-20%);
+                    }
+                    .treatment3 div{
+                        position: absolute;
+                        top: 80%;
+                        left: 10%;
+                        transform: translate(-10%,-80%);
+                    }
+                    .treatment4 div{
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                    }
+                    .horizotal div{
+                        font-size: 7rem;
+                        color: blanchedalmond;
+                    }
+                    .thank{
+                        color: rgb(85, 44, 33);
+                        font-size: 7rem;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                    }
+                    .last{
+                        position: relative;
+                    }
+                    .circ{
+        width: 200px;
+        height: 200px;
+        border: 1px solid rgb(85, 44, 33);
+        border-radius: 92% 110% 132% 88%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        animation: spin 6s linear infinite;
+        }
+
+        .circ:nth-of-type(1){
+        animation-duration: 3s;
+        border-radius: 132% 88% 92% 110%;
+        }
+
+
+        .circ:nth-of-type(2){
+        animation-duration: 8s;
+        border-radius: 75% 122% 60% 160%;
+        }
+
+        .cont{
+        position: relative;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%,-30%);
+        }
+
+        .anzutext{
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        line-height: 200px;
+        font-weight: 100;
+        color: rgb(85, 44, 33);
+        }
+
+
+        @keyframes spin{
+        100%{
+            transform: rotate(360deg);
+        }
+        }
+
+        @keyframes fade-in{
+        0%{
+            opacity: 0;
+        }
+
+        100%{
+            opacity: 1;
+        }
+        }
+        .nav-bar{
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+            left: 0;
+            padding: 10px;
+        }
+        .nav-bar .menu{
+            position: relative;
+            height: 65px;
+            width: 65px;
+            cursor: pointer;
+            z-index: 1;
+            transition: .3s ease-in-out;
+        }
+        .bar1, .bar2, .bar3{
+            position: absolute;
+            display: inline-block;
+            transform: rotate(0deg);
+            width: 37px;
+            height: 5px;
+            background-color: black;
+            border-radius: 10px;
+            transition: .3s ease-in-out;
+        }
+        .bar1{
+            top: 25%;
+        }
+        .bar2{
+            top: 45%;
+        }
+        .bar3{
+            top: 65%;
+        }
+        .dialog{
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            background-color: #efe7dd;
+            opacity: 0;
+        }
+        ul{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        li{
+            font-size: 3rem;
+            margin: 1rem 0;
+            /* font-style: italic; */
+            font-weight: bold;
+            letter-spacing: 3px;
+            opacity: 0;
+        }
+        a{
+            color: rgb(85, 44, 33);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        a:hover{
+            
+            font-size: 3.1rem;
+            transition: .3s ease-in-out;
+            position: relative; 
+            top: -3px; 
+            left: -3px; 
+            text-shadow: 1px 1px #ffffff, 
+                        2px 2px #ffffff, 
+                        3px 3px#ffffff, 
+                        4px 4px #ffffff, 
+                        5px 5px #ffffff, 
+                        6px 6px #ffffff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="logo">
+            <!-- <img src="http://dentallounge.jp/site_anzu/wp-content/themes/anzu/images/logo.png" width="400" alt=""> -->
+        </div>
+        <div class="menu">
+            <span class="bar1"></span>
+            <span class="bar2"></span>
+            <span class="bar3"></span>
+        </div>
+    </div>
+    <div class="scroller">
+
+        <section class="intro">
+            <h1 class="intro-text">
+                Hello.
+            </h1>
+            <h1 class="intro-text">
+                Everyone.
+            </h1>
+            <h1 class="intro-text">
+                Anzu Dental clinic
+            </h1>
+            <div class=" spin">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2300 1000">
+                    <title>Visit Site Link</title>
+                    <defs>
+                        <path d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250" id="textcircle">
+                            <animateTransform
+                                attributeName="transform"
+                                begin="0s"
+                                dur="10s"
+                                type="rotate"
+                                from="0 250 250"
+                                to="360 250 250"
+                                repeatCount="indefinite" 
+                                />
+                        </path>
+                    </defs>
+                        <text dy="70" textLength="1220">
+                            <textPath xlink:href="#textcircle"> .Anzu.Dental.Clinic </textPath>
+                        </text>
+                    </svg>
+            </div>
+        </section>
+        
+        <section class="blue">
+            <div class="hero" data-scroll="">
+                <h1 class="hero-text" data-scroll="" data-scroll-speed="2" >Welcome to Anzu</h1>
+                <img class="hero-img" src="http://dentallounge.jp/site_anzu/wp-content/themes/anzu/images/ph_top01.jpg" alt="">
+            </div>
+        </section>
+
+        <section class="black">
+
+            <div class="text-wrap">
+            <div class="text-wrapper">
+                <div class="panel-text blue-text">
+                    <span class="lerp-wrap" data-scroll="">
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">T</span>
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">R</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">E</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">A</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">T</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">M</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">E</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">N</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">T</span>
+                    </span>
+                    <span class="lerp-wrap" data-scroll="">
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">R</span>
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">O</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">O</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">M</span>
+                    </span>
+                </div>
+                <div class="panel-text red-text">
+                    <span class="lerp-wrap" data-scroll="">
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">C</span>
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">o</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">n</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">s</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">u</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">l</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">t</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">a</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">n</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">t</span>
+                    </span>
+                    <span class="lerp-wrap" data-scroll="">
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">R</span>
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">O</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">O</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">M</span>
+                    </span>
+                </div>
+                <div class="panel-text orange-text">
+                    <span class="lerp-wrap" data-scroll="">
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">S</span>
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">t</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">e</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">r</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">i</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">l</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">e</span>
+                    </span>
+                    <span class="lerp-wrap" data-scroll="">
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">R</span>
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">O</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">O</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">M</span>
+                    </span>
+                </div>
+                <div class="panel-text purple-text">
+                    <span class="lerp-wrap" data-scroll="">
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">E</span>
+                        <span data-scroll="" data-scroll-delay="0.10" data-scroll-speed="6">n</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">t</span>
+                        <span data-scroll="" data-scroll-delay="0.09" data-scroll-speed="6">r</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">a</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">n</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">c</span>
+                        <span data-scroll="" data-scroll-delay="0.08" data-scroll-speed="6">e</span>
+                    </span>
+                </div>
+            </div>
+            </div>
+
+            <div class="p-wrap">
+            <div class="panel blue"></div>
+            <div class="panel red"></div>
+            <div class="panel orange"></div>
+            <div class="panel purple"></div>
+            </div>
+
+        </section>
+
+        
+        <!-- <section>
+        </section> -->
+        <section class="white">
+            <div class="horizotal treatment1">
+                <img  src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+                <div >
+                    Toothbrush
+                </div>
+            </div>
+            <div class="horizotal treatment2">
+                <img  src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+                <div  >
+                    Mouthpiece
+                </div>
+            </div>
+            
+            <div class="horizotal treatment3">
+                <img  src="https://images.unsplash.com/photo-1486049125644-f35e226a5e14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI0NzY0MTA1&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+                <div  >
+                    Whiting
+                </div>
+            </div>
+            <div class="horizotal treatment4">
+                <img  src="https://images.unsplash.com/photo-1603472559212-8820d4e0e041?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0MzExMzk3MQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt="">
+                <div  >
+                    Smile
+                </div>
+            </div>
+        </section>
+        <section class="last">
+            <div class="cont">
+                <div class="circ"></div>
+                <div class="circ"></div>
+                <div class="circ"></div>
+                <div class="anzutext">ANZU</div>
+            </div>
+            <div class="thank">Thank You</div>
+        </section>
+    </div>
+    <div class="dialog">
+        <ul>
+            <li><a href="#">Treatment</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Staff</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</body>
+</html>
